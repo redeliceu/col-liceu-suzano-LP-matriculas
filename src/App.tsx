@@ -266,7 +266,13 @@ function App() {
                   </div>
                 ))}
 
-                <button className="form-submit" type="submit" disabled={isSubmitting}>
+                <button
+                  className="form-submit"
+                  type="submit"
+                  disabled={isSubmitting || !isFormValid()}
+                  aria-busy={isSubmitting}
+                >
+
                   {isSubmitting ? 'Enviando...' : 'Enviar →'}
                 </button>
 

@@ -39,7 +39,7 @@ input {
   width: 100%;
   min-height: 100svh;
   overflow: hidden;
-  background: var(--navy);
+  background: #00124f;
   color: var(--white);
   font-family: 'Figtree Variable', 'Figtree', system-ui, sans-serif;
 }
@@ -49,15 +49,10 @@ input {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50px;
   z-index: 0;
   width: 100%;
   height: max(100%, 100vh);
-  /*
-   * A foto encaixa pela altura (fachada inteira visível, como no Figma) e fica
-   * alinhada à direita. Em telas mais largas que a foto (proporção > 2000/1422),
-   * o lado esquerdo é completado com o azul da borda da imagem, com transição suave.
-   */
   background:
     linear-gradient(
       90deg,
@@ -65,7 +60,7 @@ input {
       #00124f calc(100% - 140.65vh),
       rgba(0, 18, 79, 0) calc(100% - 140.65vh + 30vh)
     ),
-    url('../assets/images/liceu-suzano-facade.jpg') right top / auto 100% no-repeat,
+    url('../assets/images/lp-background.png') right top / auto 100% no-repeat,
     #00124f;
   pointer-events: none;
 }
@@ -348,20 +343,24 @@ input {
   color: inherit;
 }
 
-/* ---------- Mobile e tablet (<1024px): quadro mobile 440×956 ---------- */
+@media(max-width: 1300px) {
+  .lp-shell::before {
+    left: 0px;
+  }
+}
 
+/* ---------- Mobile e tablet (<1024px): quadro mobile 440×956 ---------- */
 @media (max-width: 1023px) {
   .lp-shell {
     --footer-h: 174px;
     --m: clamp(0.8px, min(calc(100vw / 440), calc(100svh / 625)), 1.45px);
     --c: calc(var(--m) * 0.65913);
-
   }
-
+  
   /* Enquadramento do quadro mobile: foto ~5% maior, torre de vidro no centro */
   .lp-shell::before {
-    background-size: 100% 100%, auto max(100%, calc(1080 * var(--m)));
-    background-position: 0 0, 79% 0;
+    left: 0px;
+    opacity: 0.3;
   }
 
   .hero {

@@ -1,0 +1,17 @@
+@import '@fontsource-variable/figtree';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  min-height: 100svh;
+  background-color: #011c59;
+}
+
+body {
+  margin: 0;
+}

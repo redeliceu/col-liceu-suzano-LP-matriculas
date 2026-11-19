@@ -45,8 +45,6 @@ input {
 }
 
 /* ---------- Hero ---------- */
-
-/* Fundo: fachada com no mínimo 100vh de altura (cobre hero e rodapé) */
 .lp-shell::before {
   content: '';
   position: absolute;
@@ -55,7 +53,20 @@ input {
   z-index: 0;
   width: 100%;
   height: max(100%, 100vh);
-  background: url('../assets/images/liceu-suzano-facade.jpg') 72% 0 / cover no-repeat;
+  /*
+   * A foto encaixa pela altura (fachada inteira visível, como no Figma) e fica
+   * alinhada à direita. Em telas mais largas que a foto (proporção > 2000/1422),
+   * o lado esquerdo é completado com o azul da borda da imagem, com transição suave.
+   */
+  background:
+    linear-gradient(
+      90deg,
+      #00124f 0,
+      #00124f calc(100% - 140.65vh),
+      rgba(0, 18, 79, 0) calc(100% - 140.65vh + 30vh)
+    ),
+    url('../assets/images/liceu-suzano-facade.jpg') right top / auto 100% no-repeat,
+    #00124f;
   pointer-events: none;
 }
 
@@ -349,8 +360,8 @@ input {
 
   /* Enquadramento do quadro mobile: foto ~5% maior, torre de vidro no centro */
   .lp-shell::before {
-    background-size: auto max(100%, calc(1080 * var(--m)));
-    background-position: 79% 0;
+    background-size: 100% 100%, auto max(100%, calc(1080 * var(--m)));
+    background-position: 0 0, 79% 0;
   }
 
   .hero {

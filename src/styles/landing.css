@@ -39,15 +39,29 @@ input {
   width: 100%;
   min-height: 100svh;
   overflow: hidden;
-  background: var(--navy) url('../assets/images/liceu-suzano-facade.jpg') 72% 0 / cover no-repeat;
+  background: var(--navy);
   color: var(--white);
   font-family: 'Figtree Variable', 'Figtree', system-ui, sans-serif;
 }
 
 /* ---------- Hero ---------- */
 
+/* Fundo: fachada com no mínimo 100vh de altura (cobre hero e rodapé) */
+.lp-shell::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: max(100%, 100vh);
+  background: url('../assets/images/liceu-suzano-facade.jpg') 72% 0 / cover no-repeat;
+  pointer-events: none;
+}
+
 .hero {
   position: relative;
+  z-index: 1;
   flex: 1 0 auto;
   min-height: calc(100svh - var(--footer-h));
 }
@@ -331,9 +345,12 @@ input {
     --m: clamp(0.8px, min(calc(100vw / 440), calc(100svh / 625)), 1.45px);
     --c: calc(var(--m) * 0.65913);
 
-    /* Enquadramento do quadro mobile: foto ~5% maior, torre de vidro no centro */
-    background-size: calc(1518.75 * var(--m)) calc(1080 * var(--m));
-    background-position: calc(50vw - 1071 * var(--m)) 0;
+  }
+
+  /* Enquadramento do quadro mobile: foto ~5% maior, torre de vidro no centro */
+  .lp-shell::before {
+    background-size: auto max(100%, calc(1080 * var(--m)));
+    background-position: 79% 0;
   }
 
   .hero {
